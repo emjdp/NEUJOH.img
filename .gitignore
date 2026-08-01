@@ -1,0 +1,33 @@
+# Personal source material and generated mattes
+/*.jpg
+/*.jpeg
+/*.png
+/*.webp
+/*.heic
+/running.matte.png
+*.matte.png
+
+# Generated renders
+/out/
+
+# Local Python environment and caches
+/.venv/
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local assistant, editor, and environment settings
+/.claude/
+/.codex/
+/.idea/
+/.vscode/
+.env
+.env.*
+!.env.example
+
+# OS metadata
+.DS_Store
+Thumbs.db
