@@ -89,3 +89,9 @@ coverage × ink + (1 − coverage) × wash = cell color
 - `make_profile.py`: 여러 크롭과 해상도를 한 번에 만드는 배치 예제
 - `sweep.py`: 주요 파라미터를 비교하는 콘택트 시트 생성기
 - `fonts/`: 렌더링에 사용하는 JetBrains Mono 폰트
+
+## 라이선스
+
+- 소스 코드와 문서는 [MIT License](LICENSE)로 공개합니다.
+- `fonts/`의 JetBrains Mono 파일은 [SIL Open Font License 1.1](fonts/OFL.txt)을 따릅니다.
+- README 미리보기인 `docs/full_wide.png`는 MIT License 적용 대상이 아니며, 별도의 재사용 권한을 부여하지 않습니다.
