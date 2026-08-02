@@ -5,7 +5,7 @@ NEUJOH.img는 이미지의 색과 구조를 보존하면서 문자로 다시 그
 > **N**eural **E**dge **U**nderstanding for **J**oint **O**ptical **H**alftoning, using **I**mage-**M**apped **G**lyphs
 
 <p align="center">
-  <img src="docs/full_wide.png" width="720" alt="NEUJOH.img로 변환한 컬러 ASCII 아트 예시">
+  <img src="https://raw.githubusercontent.com/emjdp/NEUJOH.img/main/docs/full_wide.png" width="720" alt="NEUJOH.img로 변환한 컬러 ASCII 아트 예시">
 </p>
 
 ## 무엇이 다른가요?
@@ -20,20 +20,31 @@ NEUJOH.img는 이미지의 색과 구조를 보존하면서 문자로 다시 그
 
 ## 설치
 
-Python 3.12 기준입니다.
+Python 3.12 이상이 필요합니다. 아직 PyPI에는 공개하지 않았으므로 현재는 GitHub에서 바로 설치할 수 있습니다.
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+pip install git+https://github.com/emjdp/NEUJOH.img.git
 ```
 
-`rembg` 모델은 첫 실행 때 내려받을 수 있습니다. 빠르게 시험하려면 `--no-matte`를 사용하세요.
+저장소를 내려받아 개발하거나 피사체 분리 기능까지 설치하려면 다음을 사용합니다.
+
+```bash
+git clone https://github.com/emjdp/NEUJOH.img.git
+cd NEUJOH.img
+
+# 기본 설치
+pip install -e .
+
+# rembg와 ONNX Runtime을 포함한 전체 설치
+pip install -e ".[matte]"
+```
+
+PyPI에 첫 릴리스를 올린 뒤에는 `pip install neujoh-img`로 설치할 수 있습니다. `rembg` 모델은 매트 기능의 첫 실행 때 내려받을 수 있으며, 기본 설치에서는 `--no-matte`를 사용하면 됩니다.
 
 ## 사용법
 
 ```bash
-python ascii_art.py input.jpg \
+neujoh input.jpg \
   --cols 100 \
   --aspect 1:1 \
   --look film \
@@ -63,7 +74,21 @@ python ascii_art.py input.jpg \
 전체 옵션은 다음 명령으로 확인할 수 있습니다.
 
 ```bash
-python ascii_art.py --help
+neujoh --help
+```
+
+`python -m neujoh`도 같은 명령을 실행합니다. 기존 저장소 사용자를 위해 `python ascii_art.py` 실행 방식도 유지됩니다.
+
+Python 코드에서는 렌더러 API를 직접 사용할 수 있습니다.
+
+```python
+from PIL import Image
+from neujoh import Config, composite, convert
+
+source = Image.open("input.jpg")
+config = Config(cols=100, matte=False)
+result = convert(source, config)
+composite(result, config).save("result.png")
 ```
 
 ## 파이프라인
@@ -85,13 +110,16 @@ coverage × ink + (1 − coverage) × wash = cell color
 
 ## 구성
 
-- `ascii_art.py`: 변환 파이프라인과 CLI
+- `pyproject.toml`: 패키지 메타데이터, 의존성, `neujoh` 명령 정의
+- `src/neujoh/renderer.py`: 변환 및 합성 파이프라인
+- `src/neujoh/cli.py`: 명령줄 인터페이스
+- `src/neujoh/fonts/`: 패키지에 포함되는 JetBrains Mono 폰트
+- `ascii_art.py`: 기존 실행 방식과의 호환용 진입점
 - `make_profile.py`: 여러 크롭과 해상도를 한 번에 만드는 배치 예제
 - `sweep.py`: 주요 파라미터를 비교하는 콘택트 시트 생성기
-- `fonts/`: 렌더링에 사용하는 JetBrains Mono 폰트
 
 ## 라이선스
 
 - 소스 코드와 문서는 [MIT License](LICENSE)로 공개합니다.
-- `fonts/`의 JetBrains Mono 파일은 [SIL Open Font License 1.1](fonts/OFL.txt)을 따릅니다.
+- 패키지에 포함된 JetBrains Mono 파일은 [SIL Open Font License 1.1](src/neujoh/fonts/OFL.txt)을 따릅니다.
 - README 미리보기인 `docs/full_wide.png`는 MIT License 적용 대상이 아니며, 별도의 재사용 권한을 부여하지 않습니다.

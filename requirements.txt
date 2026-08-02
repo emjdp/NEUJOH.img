@@ -1,6 +1,2 @@
-numpy==2.4.6
-onnxruntime==1.28.0
-opencv-python-headless==5.0.0.93
-pillow==12.3.0
-rembg==2.0.77
-scipy==1.18.0
+# Full local installation, including optional subject-matte support.
+-e .[matte]

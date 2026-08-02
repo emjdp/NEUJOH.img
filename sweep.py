@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 import ascii_art as A
 
-FONT = ImageFont.truetype("fonts/JetBrainsMono-Bold.ttf", 20)
+FONT = ImageFont.truetype(A.DEFAULT_FONT, 20)
 
 
 def sheet(src_path: str, base: A.Config, variants: list[dict], out: str, tile: int = 430,

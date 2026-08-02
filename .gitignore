@@ -18,6 +18,10 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+/build/
+/dist/
+/*.egg-info/
+*.egg-info/
 
 # Local assistant, editor, and environment settings
 /.claude/
