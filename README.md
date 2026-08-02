@@ -20,13 +20,19 @@ NEUJOH.img는 이미지의 색과 구조를 보존하면서 문자로 다시 그
 
 ## 설치
 
-Python 3.12 이상이 필요합니다. 아직 PyPI에는 공개하지 않았으므로 현재는 GitHub에서 바로 설치할 수 있습니다.
+Python 3.12 이상이 필요합니다. 기본 변환 기능은 PyPI에서 설치할 수 있습니다.
 
 ```bash
-pip install git+https://github.com/emjdp/NEUJOH.img.git
+pip install neujoh-img
 ```
 
-저장소를 내려받아 개발하거나 피사체 분리 기능까지 설치하려면 다음을 사용합니다.
+피사체 분리 기능까지 사용하려면 `matte` 추가 의존성을 함께 설치합니다.
+
+```bash
+pip install "neujoh-img[matte]"
+```
+
+저장소를 내려받아 개발하려면 다음을 사용합니다.
 
 ```bash
 git clone https://github.com/emjdp/NEUJOH.img.git
@@ -39,7 +45,7 @@ pip install -e .
 pip install -e ".[matte]"
 ```
 
-PyPI에 첫 릴리스를 올린 뒤에는 `pip install neujoh-img`로 설치할 수 있습니다. `rembg` 모델은 매트 기능의 첫 실행 때 내려받을 수 있으며, 기본 설치에서는 `--no-matte`를 사용하면 됩니다.
+`rembg` 모델은 매트 기능의 첫 실행 때 내려받을 수 있으며, 기본 설치에서는 `--no-matte`를 사용하면 됩니다.
 
 ## 사용법
 
